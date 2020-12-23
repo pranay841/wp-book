@@ -14,3 +14,6 @@ require dirname( __FILE__ ) . '/includes/wb-add-book-type.php';
 
 // loads wp-add-taxonomies file from includes folder.
 require dirname( __FILE__ ) . '/includes/wb-add-taxonomies.php';
+
+// loads wp-add-meta-box file from includes folder.
+require dirname( __FILE__ ) . '/includes/wb-add-meta-box.php';
