@@ -11,3 +11,6 @@
 
 // loads wp-add-book-type file from includes folder.
 require dirname( __FILE__ ) . '/includes/wb-add-book-type.php';
+
+// loads wp-add-taxonomies file from includes folder.
+require dirname( __FILE__ ) . '/includes/wb-add-taxonomies.php';
