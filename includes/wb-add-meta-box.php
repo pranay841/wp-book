@@ -26,12 +26,12 @@ function wb_book_info_callback( $post ) {
 
 	wp_nonce_field( 'wb_save_info', 'wb_save_info_nonce' );
 
-	$wb_author_value         = get_metadata( 'post', $post->ID, 'wb_meta_author_name_key', true );
-	$wb_price_value          = get_metadata( 'post', $post->ID, 'wb_meta_price_key', true );
-	$wb_publisher_name_value = get_metadata( 'post', $post->ID, 'wb_meta_publisher_name_key', true );
-	$wb_year_value           = get_metadata( 'post', $post->ID, 'wb_meta_year_key', true );
-	$wb_edition_value        = get_metadata( 'post', $post->ID, 'wb_meta_edition_key', true );
-	$wb_url_value            = get_metadata( 'post', $post->ID, 'wb_meta_url_key', true );
+	$wb_author_value         = get_metadata( 'book', $post->ID, 'wb_meta_author_name_key', true );
+	$wb_price_value          = get_metadata( 'book', $post->ID, 'wb_meta_price_key', true );
+	$wb_publisher_name_value = get_metadata( 'book', $post->ID, 'wb_meta_publisher_name_key', true );
+	$wb_year_value           = get_metadata( 'book', $post->ID, 'wb_meta_year_key', true );
+	$wb_edition_value        = get_metadata( 'book', $post->ID, 'wb_meta_edition_key', true );
+	$wb_url_value            = get_metadata( 'book', $post->ID, 'wb_meta_url_key', true );
 
 	echo '<label for = "wb_meta_author_name" > Author Name: </label>';
 	echo '<input id = "wb_meta_author_name" name = "wb_meta_author_name" value = "' . esc_attr( $wb_author_value ) . '"><br/>';
@@ -72,32 +72,32 @@ function wb_save_book_info( $post_id ) {
 	}
 	if ( ! empty( $_POST['wb_meta_author_name'] ) ) {
 		$wb_author_name = sanitize_text_field( wp_unslash( $_POST['wb_meta_author_name'] ) );
-		update_metadata( 'post', $post_id, 'wb_meta_author_name_key', $wb_author_name );
+		update_metadata( 'book', $post_id, 'wb_meta_author_name_key', $wb_author_name );
 	}
 
 	if ( ! empty( $_POST['wb_meta_price'] ) ) {
 		$wb_price = sanitize_text_field( wp_unslash( $_POST['wb_meta_price'] ) );
-		update_metadata( 'post', $post_id, 'wb_meta_price_key', $wb_price );
+		update_metadata( 'book', $post_id, 'wb_meta_price_key', $wb_price );
 	}
 
 	if ( ! empty( $_POST['wb_meta_publisher_name'] ) ) {
 		$wb_publisher_name = sanitize_text_field( wp_unslash( $_POST['wb_meta_publisher_name'] ) );
-		update_metadata( 'post', $post_id, 'wb_meta_publisher_name_key', $wb_publisher_name );
+		update_metadata( 'book', $post_id, 'wb_meta_publisher_name_key', $wb_publisher_name );
 	}
 
 	if ( ! empty( $_POST['wb_meta_year'] ) ) {
 		$wb_year = sanitize_text_field( wp_unslash( $_POST['wb_meta_year'] ) );
-		update_metadata( 'post', $post_id, 'wb_meta_year_key', $wb_year );
+		update_metadata( 'book', $post_id, 'wb_meta_year_key', $wb_year );
 	}
 
 	if ( ! empty( $_POST['wb_meta_edition'] ) ) {
 		$wb_edition = sanitize_text_field( wp_unslash( $_POST['wb_meta_edition'] ) );
-		update_metadata( 'post', $post_id, 'wb_meta_edition_key', $wb_edition );
+		update_metadata( 'book', $post_id, 'wb_meta_edition_key', $wb_edition );
 	}
 
 	if ( ! empty( $_POST['wb_meta_url'] ) ) {
 		$wb_url = sanitize_text_field( wp_unslash( $_POST['wb_meta_url'] ) );
-		update_metadata( 'post', $post_id, 'wb_meta_url_key', $wb_url );
+		update_metadata( 'book', $post_id, 'wb_meta_url_key', $wb_url );
 	}
 
 }
