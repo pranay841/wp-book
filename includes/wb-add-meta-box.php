@@ -32,24 +32,26 @@ function wb_book_info_callback( $post ) {
 	$wb_year_value           = get_metadata( 'book', $post->ID, 'wb_meta_year_key', true );
 	$wb_edition_value        = get_metadata( 'book', $post->ID, 'wb_meta_edition_key', true );
 	$wb_url_value            = get_metadata( 'book', $post->ID, 'wb_meta_url_key', true );
+	$options                 = get_option( 'booksmenu_options' );
+	$wb_currency_value       = $options['currency'];
 
 	echo '<label for = "wb_meta_author_name" > Author Name: </label>';
-	echo '<input id = "wb_meta_author_name" name = "wb_meta_author_name" value = "' . esc_attr( $wb_author_value ) . '"><br/>';
+	echo '<input id = "wb_meta_author_name" name = "wb_meta_author_name" value = "' . esc_attr( $wb_author_value ) . '"><br/><br/>';
 
-	echo '<label for = "wb_meta_price" > Price: </label>';
-	echo '<input id = "wb_meta_price" name = "wb_meta_price" value = "' . esc_attr( $wb_price_value ) . '"><br/>';
+	echo '<label for = "wb_meta_price" > Price( <span>' . esc_html( $wb_currency_value ) . '</span> ): </label>';
+	echo '<input id = "wb_meta_price" name = "wb_meta_price" value = "' . esc_attr( $wb_price_value ) . '"><br/><br/>';
 
 	echo '<label for = "wb_meta_publisher_name" > Publisher: </label>';
-	echo '<input id = "wb_meta_publisher_name" name = "wb_meta_publisher_name" value = "' . esc_attr( $wb_publisher_name_value ) . '"><br/>';
+	echo '<input id = "wb_meta_publisher_name" name = "wb_meta_publisher_name" value = "' . esc_attr( $wb_publisher_name_value ) . '"><br/><br/>';
 
 	echo '<label for = "wb_meta_year" > Year: </label>';
-	echo '<input id = "wb_meta_year" name = "wb_meta_year" value = "' . esc_attr( $wb_year_value ) . '"><br/>';
+	echo '<input id = "wb_meta_year" name = "wb_meta_year" value = "' . esc_attr( $wb_year_value ) . '"><br/><br/>';
 
 	echo '<label for = "wb_meta_edition" > Edition: </label>';
-	echo '<input id = "wb_meta_edition" name = "wb_meta_edition" value = "' . esc_attr( $wb_edition_value ) . '"><br/>';
+	echo '<input id = "wb_meta_edition" name = "wb_meta_edition" value = "' . esc_attr( $wb_edition_value ) . '"><br/><br/>';
 
 	echo '<label for = "wb_meta_url" > URL: </label>';
-	echo '<input id = "wb_meta_url" name = "wb_meta_url" value = "' . esc_attr( $wb_url_value ) . '"><br/>';
+	echo '<input id = "wb_meta_url" name = "wb_meta_url" value = "' . esc_attr( $wb_url_value ) . '"><br/><br/>';
 
 }
 /**
@@ -64,12 +66,14 @@ add_action( 'save_post', 'wb_save_book_info' );
  * @param POST_ID $post_id is a parameter passed that has the id of the current post.
  */
 function wb_save_book_info( $post_id ) {
+	$options = get_option( 'booksmenu_options' );
 	if ( ! isset( $_POST['wb_save_info_nonce'] ) ) {
 		return;
 	}
 	if ( ! wp_verify_nonce( sanitize_key( $_POST['wb_save_info_nonce'] ), 'wb_save_info' ) ) {
 		return;
 	}
+
 	if ( ! empty( $_POST['wb_meta_author_name'] ) ) {
 		$wb_author_name = sanitize_text_field( wp_unslash( $_POST['wb_meta_author_name'] ) );
 		update_metadata( 'book', $post_id, 'wb_meta_author_name_key', $wb_author_name );
@@ -78,6 +82,7 @@ function wb_save_book_info( $post_id ) {
 	if ( ! empty( $_POST['wb_meta_price'] ) ) {
 		$wb_price = sanitize_text_field( wp_unslash( $_POST['wb_meta_price'] ) );
 		update_metadata( 'book', $post_id, 'wb_meta_price_key', $wb_price );
+		update_metadata( 'book', $post_id, 'wb_currency', isset( $options['currency'] ) ? $options['currency'] : 'Ruppes' );
 	}
 
 	if ( ! empty( $_POST['wb_meta_publisher_name'] ) ) {

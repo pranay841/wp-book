@@ -17,3 +17,9 @@ require dirname( __FILE__ ) . '/includes/wb-add-taxonomies.php';
 
 // loads wp-add-meta-box file from includes folder.
 require dirname( __FILE__ ) . '/includes/wb-add-meta-box.php';
+
+// loads wp-add-custom-meta-table file from includes folder.
+require dirname( __FILE__ ) . '/includes/wb-add-custom-meta-table.php';
+
+// loads wp-add-booksmenu file from includes folder.
+require dirname( __FILE__ ) . '/includes/wb-add-booksmenu.php';
