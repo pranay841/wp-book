@@ -28,10 +28,11 @@ function wb_register_shortcode() {
  */
 function wb_book_shortcode_cb( $atts ) {
 	global $wpdb;
-	$result_array       = array();
-	$result_output      = '';
-	$book_id_given      = false;
-	$ids_of_common_meta = array();
+	$result_array        = array();
+	$result_output       = '';
+	$book_id_given       = false;
+	$ids_of_common_meta  = array();
+	$attributes_provided = false;
 
 	$a = shortcode_atts(
 		array(
@@ -55,6 +56,7 @@ function wb_book_shortcode_cb( $atts ) {
 
 	foreach ( $a as $key => $value ) {
 		if ( '' !== $value ) {
+			$attributes_provided = true;
 			if ( 'id' === $key ) {
 				$args['post__in'][] = $value;
 				$book_id_given      = true;
@@ -93,8 +95,12 @@ function wb_book_shortcode_cb( $atts ) {
 		};
 
 	}
+	if ( ! $attributes_provided ) {
 
-	if ( $book_id_given && ! in_array( $args['post__in'][1], $ids_of_common_meta, true ) ) {
+		return;
+	}
+
+	if ( $book_id_given && ! empty( $ids_of_common_meta ) && ! in_array( $args['post__in'][1], $ids_of_common_meta, true ) ) {
 		return;
 	}
 	if ( ! $book_id_given ) {
