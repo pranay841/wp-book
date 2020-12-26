@@ -23,3 +23,6 @@ require dirname( __FILE__ ) . '/includes/wb-add-custom-meta-table.php';
 
 // loads wp-add-booksmenu file from includes folder.
 require dirname( __FILE__ ) . '/includes/wb-add-booksmenu.php';
+
+// loads wp-add-shortcodes file from includes folder.
+require dirname( __FILE__ ) . '/includes/wb-add-shortcodes.php';

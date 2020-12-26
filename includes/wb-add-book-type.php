@@ -16,12 +16,13 @@ add_action( 'init', 'wb_add_book_type' );
  */
 function wb_add_book_type() {
 	$args = array(
-		'labels'      => array(
+		'labels'       => array(
 			'name'          => __( 'Books', 'wp-book' ),
 			'singular_name' => __( 'Book', 'wp-book' ),
 		),
-		'public'      => true,
-		'has_archive' => true,
+		'public'       => true,
+		'has_archive'  => true,
+		'show_in_rest' => true,
 	);
 	register_post_type( 'book', $args );
 }

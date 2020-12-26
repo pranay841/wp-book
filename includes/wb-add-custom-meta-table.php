@@ -41,7 +41,6 @@ function wb_add_book_meta_table() {
 *Using plugins_loaded hook to trigger call back that links meta api with custom table.
 */
 add_action( 'plugins_loaded', 'wb_meta_link_wpdb' );
-
 /**
  * Callback function that links meta api with the custom meta table book.
  *
