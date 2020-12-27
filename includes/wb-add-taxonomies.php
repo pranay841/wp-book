@@ -1,6 +1,6 @@
 <?php
 /**
- * File to create a custom taxonomies for book.
+ * File to create  custom taxonomies for book.
  *
  * @package WordPress
  */

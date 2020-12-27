@@ -26,3 +26,6 @@ require dirname( __FILE__ ) . '/includes/wb-add-booksmenu.php';
 
 // loads wp-add-shortcodes file from includes folder.
 require dirname( __FILE__ ) . '/includes/wb-add-shortcodes.php';
+
+// loads wb-add-category-widget file from includes folder.
+require dirname( __FILE__ ) . '/includes/class-wb-book-category.php';

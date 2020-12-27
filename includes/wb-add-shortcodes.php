@@ -20,7 +20,7 @@ function wb_register_shortcode() {
 /**
  * Callback function to handle the input by the user.
  *
- * This function has a dynamic args array that is altered as per input given by the user ans that is passed to the
+ * This function has a dynamic args array that is altered as per input given by the user and that is passed to the
  * query to get the posts satisfying those condition.
  *
  * @param Attributes $atts this contains values of all the attributes passed by the user with book shortcode.
