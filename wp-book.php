@@ -29,3 +29,6 @@ require dirname( __FILE__ ) . '/includes/wb-add-shortcodes.php';
 
 // loads wb-add-category-widget file from includes folder.
 require dirname( __FILE__ ) . '/includes/class-wb-book-category.php';
+
+// loads wb-add-desktop-widget file from includes folder.
+require dirname( __FILE__ ) . '/includes/wb-add-desktop-widget.php';
