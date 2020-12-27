@@ -48,17 +48,17 @@ function wb_booksmenu_settings_setup() {
 
 	register_setting( 'booksmenu', 'booksmenu_options' );
 
-	add_settings_section( 'wb_booksmenu_section_id', 'Settings for Book Post', 'wb_booksmenu_section_cb', 'booksmenu' );
+	add_settings_section( 'wb_booksmenu_section_id', __( 'Settings for Book Post', 'wp-book' ), 'wb_booksmenu_section_cb', 'booksmenu' );
 
 	add_settings_field(
 		'wb_booksmenu_field_posts_flow_id',
-		'Control Posts Flow',
+		__( 'Control Posts Flow', 'wp-book' ),
 		'wb_booksmenu_field_posts_flow_cb',
 		'booksmenu',
 		'wb_booksmenu_section_id',
 	);
 
-	add_settings_field( 'wb_booksmenu_field_currency_id', 'Set Currency', 'wb_booksmenu_field_currency_cb', 'booksmenu', 'wb_booksmenu_section_id' );
+	add_settings_field( 'wb_booksmenu_field_currency_id', __( 'Set Currency', 'wp-book' ), 'wb_booksmenu_field_currency_cb', 'booksmenu', 'wb_booksmenu_section_id' );
 }
 
 /**
@@ -74,7 +74,7 @@ function wb_booksmenu_field_posts_flow_cb() {
 	$options = get_option( 'booksmenu_options' );
 
 	?>
-<span>Number of posts per page:</span>
+<span><?php esc_html_e( 'Number of posts per page:', 'wp-book' ); ?></span>
 <input id="name_id" name='booksmenu_options[numofposts]' value=<?php isset( $options['numofposts'] ) ? print( esc_attr( $options['numofposts'] ) ) : print( 5 ); ?>>
 	<?php
 }
@@ -89,7 +89,7 @@ function wb_booksmenu_field_currency_cb() {
 		update_option( 'booksmenu_options', $options );
 	}
 	?>
-<span>Currency</span>
+<span><?php esc_html_e( 'Currency', 'wp-book' ); ?></span>
 <select name='booksmenu_options[currency]'>
 	<option value='Rupees' <?php selected( $options['currency'], 'Rupees', true ); ?>>Rupees</option>
 	<option value='Dollar'  <?php selected( $options['currency'], 'Dollar', true ); ?>>Dollar</option>

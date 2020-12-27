@@ -15,7 +15,7 @@ add_action( 'add_meta_boxes', 'wb_add_meta_box_func' );
  * Callback function to trigger add_meta_box() .
  */
 function wb_add_meta_box_func() {
-	add_meta_box( 'wb_book_info', 'Book Information', 'wb_book_info_callback', 'Book' );
+	add_meta_box( 'wb_book_info', __( 'Book Information', 'wp-book' ), 'wb_book_info_callback', 'Book' );
 }
 /**
  * Callback function to create custom meta boxes of author name,price,publisher,year,edition and url.
@@ -35,22 +35,22 @@ function wb_book_info_callback( $post ) {
 	$options                 = get_option( 'booksmenu_options' );
 	$wb_currency_value       = $options['currency'];
 
-	echo '<label for = "wb_meta_author_name" > Author Name: </label>';
+	echo '<label for = "wb_meta_author_name" > ' . esc_html_e( 'Author Name:', 'wp-book' ) . ' </label>';
 	echo '<input id = "wb_meta_author_name" name = "wb_meta_author_name" value = "' . esc_attr( $wb_author_value ) . '"><br/><br/>';
 
-	echo '<label for = "wb_meta_price" > Price( <span>' . esc_html( $wb_currency_value ) . '</span> ): </label>';
+	echo '<label for = "wb_meta_price" > ' . esc_html_e( 'Price', 'wp-book' ) . '( <span>' . esc_html( $wb_currency_value ) . '</span> ): </label>';
 	echo '<input id = "wb_meta_price" name = "wb_meta_price" value = "' . esc_attr( $wb_price_value ) . '"><br/><br/>';
 
-	echo '<label for = "wb_meta_publisher_name" > Publisher: </label>';
+	echo '<label for = "wb_meta_publisher_name" > ' . esc_html_e( 'Publisher:', 'wp-book' ) . ' </label>';
 	echo '<input id = "wb_meta_publisher_name" name = "wb_meta_publisher_name" value = "' . esc_attr( $wb_publisher_name_value ) . '"><br/><br/>';
 
-	echo '<label for = "wb_meta_year" > Year: </label>';
+	echo '<label for = "wb_meta_year" > ' . esc_html_e( 'Year:', 'wp-book' ) . ' </label>';
 	echo '<input id = "wb_meta_year" name = "wb_meta_year" value = "' . esc_attr( $wb_year_value ) . '"><br/><br/>';
 
-	echo '<label for = "wb_meta_edition" > Edition: </label>';
+	echo '<label for = "wb_meta_edition" > ' . esc_html_e( 'Edition:', 'wp-book' ) . ' </label>';
 	echo '<input id = "wb_meta_edition" name = "wb_meta_edition" value = "' . esc_attr( $wb_edition_value ) . '"><br/><br/>';
 
-	echo '<label for = "wb_meta_url" > URL: </label>';
+	echo '<label for = "wb_meta_url" > ' . esc_html_e( 'URL:', 'wp-book' ) . ' </label>';
 	echo '<input id = "wb_meta_url" name = "wb_meta_url" value = "' . esc_attr( $wb_url_value ) . '"><br/><br/>';
 
 }

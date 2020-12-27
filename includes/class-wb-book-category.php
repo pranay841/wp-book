@@ -19,7 +19,7 @@ class Wb_Book_Category extends WP_Widget {
 
 		$widget_options = array(
 			'classname'                   => 'wb_book_category_widget',
-			'description'                 => 'This widget will show the books from the selected category.',
+			'description'                 => __( 'This widget will show the books from the selected category.', 'wp-book' ),
 			'customize_selective_refresh' => true,
 		);
 
@@ -75,7 +75,7 @@ class Wb_Book_Category extends WP_Widget {
 		echo '<ul>';
 		while ( $query->have_posts() ) {
 			$query->the_post();
-			echo '<li><a href="' . esc_attr( get_permalink( get_the_ID() ) ) . '" aria-current="page">' . esc_html( get_the_title() ) . '</a></li>';
+			echo '<li><a href="' . esc_attr( get_permalink( get_the_ID() ) ) . '" >' . esc_html( get_the_title() ) . '</a></li>';
 		}
 		echo '</ul>';
 		if ( 'html5' === $format ) {
