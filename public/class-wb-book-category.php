@@ -67,7 +67,7 @@ class Wb_Book_Category extends WP_Widget {
 		$format = apply_filters( 'navigation_widgets_format', $format );
 
 		if ( 'html5' === $format ) {
-			$title      = trim( strip_all_tags( $title ) );
+			$title      = trim( wp_strip_all_tags( $title ) );
 			$aria_label = $title;
 
 			echo '<nav role="navigation" aria_label="' . esc_attr( $aria_label ) . '" >';
@@ -119,17 +119,4 @@ class Wb_Book_Category extends WP_Widget {
 
 		return $instance;
 	}
-}
-
-/**
-*Using widgets_init hook to trigger a callback that registers custom widget.
-*/
-add_action( 'widgets_init', 'wb_register_book_category_widget_cb' );
-
-/**
- * Callabck function to register the custom widget that displays books of particular category provided by user.
- */
-function wb_register_book_category_widget_cb() {
-
-	register_widget( 'Wb_Book_Category' );
 }

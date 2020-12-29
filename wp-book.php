@@ -1,76 +1,82 @@
 <?php
 /**
- * Main file for the plugin.
+ * The plugin bootstrap file
  *
- * @package WordPress
- * Plugin Name: Wp Book
- * Description: This plugin is used to store the information about books.
- * Author:      Pranay Chahare
- * Text-domain: wp-book
- * Domain Path: /languages/
+ * This file is read by WordPress to generate the plugin information in the plugin
+ * admin area. This file also includes all of the dependencies used by the plugin,
+ * registers the activation and deactivation functions, and defines a function
+ * that starts the plugin.
+ *
+ * @link              https://github.com/pranay841/
+ * @since             1.0.0
+ * @package           Wp_Book
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Wp Book
+ * Plugin URI:        https://github.com/pranay841/Wp-book/
+ * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Version:           1.0.0
+ * Author:            Pranay Chahare
+ * Author URI:        https://github.com/pranay841/
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       wp-book
+ * Domain Path:       /languages
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
 /**
-*Using register_activation_hook to trigger callback that will flush rewrite rules.
-*/
-register_activation_hook( __FILE__, 'wb_activate_cb' );
+ * Currently plugin version.
+ * Start at version 1.0.0 and use SemVer - https://semver.org
+ * Rename this for your plugin and update it as you release new versions.
+ */
+define( 'WP_BOOK_VERSION', '1.0.0' );
 
 /**
- * Callback function to flush rewrite rules.
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-wp-book-activator.php
  */
-function wb_activate_cb() {
-	flush_rewrite_rules();
+function activate_wp_book() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-book-activator.php';
+	Wp_Book_Activator::activate();
+	Wp_Book_Activator::wb_add_book_meta_table();
 }
 
 /**
-*Using register_deactivation_hook to trigger callback that will flush rewrite rules.
-*/
-register_deactivation_hook( __FILE__, 'wb_deactivate_cb' );
-
-/**
- * Callback function to flush rewrit rules on plugin deactivation.
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-wp-book-deactivator.php
  */
-function wb_deactivate_cb() {
-	flush_rewrite_rules();
+function deactivate_wp_book() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-book-deactivator.php';
+	Wp_Book_Deactivator::deactivate();
 }
 
-/**
-*Using plugins_loaded hook to trigger a callback that loads plugin text domain.
-*/
-add_action( 'plugins_loaded', 'wb_load_text_domain_cb' );
+register_activation_hook( __FILE__, 'activate_wp_book' );
+register_deactivation_hook( __FILE__, 'deactivate_wp_book' );
 
 /**
- * Callback to load plugin textdomain.
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
  */
-function wb_load_text_domain_cb() {
+require plugin_dir_path( __FILE__ ) . 'includes/class-wp-book.php';
 
-	load_plugin_textdomain( 'wp-book', false, dirname( __FILE__ ) . '/languages/' );
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_wp_book() {
+
+	$plugin = new Wp_Book();
+	$plugin->run();
+
 }
-
-// loads wp-add-book-type file from includes folder.
-require dirname( __FILE__ ) . '/includes/wb-add-book-type.php';
-
-// loads wp-add-taxonomies file from includes folder.
-require dirname( __FILE__ ) . '/includes/wb-add-taxonomies.php';
-
-// loads wp-add-meta-box file from includes folder.
-require dirname( __FILE__ ) . '/includes/wb-add-meta-box.php';
-
-// loads wp-add-custom-meta-table file from includes folder.
-require dirname( __FILE__ ) . '/includes/wb-add-custom-meta-table.php';
-
-// loads wp-add-booksmenu file from includes folder.
-require dirname( __FILE__ ) . '/includes/wb-add-booksmenu.php';
-
-// loads wp-add-shortcodes file from includes folder.
-require dirname( __FILE__ ) . '/includes/wb-add-shortcodes.php';
-
-// loads wb-add-category-widget file from includes folder.
-require dirname( __FILE__ ) . '/includes/class-wb-book-category.php';
-
-// loads wb-add-desktop-widget file from includes folder.
-require dirname( __FILE__ ) . '/includes/wb-add-desktop-widget.php';
+run_wp_book();
