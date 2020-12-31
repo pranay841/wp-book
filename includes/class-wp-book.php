@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -182,7 +181,7 @@ class Wp_Book {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_public, 'wb_add_meta_box_func' );
 		$this->loader->add_action( 'save_post', $plugin_public, 'wb_save_book_info' );
-		$this->loader->add_action( 'pre_get_posts', $plugin_public, 'wb_control_post' );
+		$this->loader->add_filter( 'pre_get_posts', $plugin_public, 'wb_control_post' );
 		$this->loader->add_action( 'init', $plugin_public, 'wb_register_shortcode' );
 		$this->loader->add_action( 'widgets_init', $plugin_public, 'wb_register_book_category_widget_cb' );
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_public, 'wb_add_dashboard_widget_cb' );

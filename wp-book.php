@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       Wp Book
  * Plugin URI:        https://github.com/pranay841/Wp-book/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This is plugin that adds book post type and extensions such as settings,widgets,shortcode.
  * Version:           1.0.0
  * Author:            Pranay Chahare
  * Author URI:        https://github.com/pranay841/
