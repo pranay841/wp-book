@@ -40,17 +40,13 @@ class Wb_Book_Category extends WP_Widget {
 			'post_type' => 'book',
 
 			'tax_query' => array(   //phpcs:ignore
-				'relation' => 'OR',
+
 				array(
 					'taxonomy' => 'Book Category',
 					'field'    => 'slug',
 					'terms'    => $instance['category'],
 				),
-				array(
-					'taxonomy' => 'Book Tag',
-					'field'    => 'slug',
-					'terms'    => $instance['category'],
-				),
+
 			),
 
 		);
@@ -91,15 +87,28 @@ class Wb_Book_Category extends WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$title    = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New Title', 'wp-book' );
-		$category = ! empty( $instance['category'] ) ? $instance['category'] : __( 'none', 'wp-book' );
+		$title         = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New Title', 'wp-book' );
+		$category      = ! empty( $instance['category'] ) ? $instance['category'] : __( 'none', 'wp-book' );
+		$category_list = get_categories(
+			array(
+				'taxonomy' => 'Book Category',
+			)
+		);
 		?>
 	<p>
 	<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__( 'Title:', 'wp-book' ); ?></label>
 	<input type="text" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>">
 
-	<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php echo esc_attr__( 'Category:', 'wp-book' ); ?></label>
-	<input type="text" id="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>" class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'category' ) ); ?>" value="<?php echo esc_attr( $category ); ?>">
+<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php echo esc_attr__( 'Category:', 'wp-book' ); ?></label><br>
+<select name="<?php echo esc_attr( $this->get_field_name( 'category' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
+		<?php
+		foreach ( $category_list as $term ) {
+			?>
+		<option value="<?php echo esc_html( $term->name ); ?>" <?php selected( $instance['category'], $term->name, true ); ?> ><?php echo esc_html( $term->name ); ?></option>
+			<?php
+		}
+		?>
+</select>
 
 	</p>
 		<?php

@@ -240,7 +240,7 @@ class Wp_Book_Admin {
 
 		$options = get_option( 'booksmenu_options' );
 		if ( ! isset( $options['currency'] ) ) {
-			$options['currency'] = 'Ruppes';
+			$options['currency'] = 'Rupees';
 			update_option( 'booksmenu_options', $options );
 		}
 		?>
